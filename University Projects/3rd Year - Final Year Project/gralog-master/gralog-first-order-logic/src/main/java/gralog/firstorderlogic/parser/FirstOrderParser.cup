@@ -1,0 +1,130 @@
+package gralog.firstorderlogic.parser;
+
+import java_cup.runtime.*;
+import gralog.algorithm.ParseError;
+import gralog.firstorderlogic.formula.*;
+import java.io.ByteArrayInputStream;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
+
+parser code {:
+
+    String errorMsg = null;
+    private String inputString;
+
+    public Boolean hasError()
+    {
+        return errorMsg == null;
+    }
+    
+    public String getErrorMsg()
+    {
+        if(errorMsg == null)
+            return "no error";
+        else
+            return errorMsg;
+    }
+
+    @Override
+    public void report_error(String message, Object info) {
+    }
+
+    @Override
+    public void syntax_error(Symbol cur_token)
+    {
+        if(errorMsg == null)
+            errorMsg = "Syntax Error: " + cur_token.toString();
+    }
+
+    @Override
+    public void report_fatal_error(String message, Object info) throws ParseError
+    {
+        java_cup.runtime.ComplexSymbolFactory.ComplexSymbol symbol = (java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)info;
+        throw new ParseError("Unexpected " + symbol.getName(), inputString, symbol.xleft.getColumn());
+    }
+
+    static public FirstOrderFormula parseString(String str) throws Exception
+    {
+        FirstOrderParser parser = new FirstOrderParser(
+                new FirstOrderScanner(new StringReader(str)),
+                new java_cup.runtime.ComplexSymbolFactory());
+        parser.inputString = str;
+        Symbol parserresult = parser.parse();
+        return (FirstOrderFormula) parserresult.value;
+    }
+:}
+
+terminal OPEN, CLOSE;      // "(", ")"
+terminal NEG, AND, OR;     // \neg, \wedge, \vee
+terminal EXISTS, FORALL;   // \exists \forall
+terminal COMMA, DOT;       // ",", "."
+terminal EQUALS;           // "="
+terminal String STRING;
+
+non terminal FirstOrderFormula formula;
+non terminal FirstOrderFormula quantifiedformula;
+non terminal FirstOrderFormula basicformula;
+non terminal FirstOrderFormula disjunction;
+non terminal FirstOrderFormula conjunction;
+non terminal List<String> parameters;
+
+formula ::=
+    quantifiedformula:f
+        {: RESULT = f; :}
+    | disjunction:left OR quantifiedformula:right
+        {: RESULT = new FirstOrderOr(left, right); :}
+    | conjunction:left AND quantifiedformula:right
+        {: RESULT = new FirstOrderAnd(left, right); :}
+    | disjunction:left OR conjunction:middle AND quantifiedformula:right
+        {: RESULT = new FirstOrderOr(left, new FirstOrderAnd(middle, right)); :}
+    | disjunction:f
+        {: RESULT = f; :}
+    ;
+
+disjunction ::=
+    disjunction:left OR conjunction:right
+        {: RESULT = new FirstOrderOr(left, right); :}
+    | conjunction:f
+        {: RESULT = f; :}
+    ;
+
+conjunction ::=
+    conjunction:left AND basicformula:right
+        {: RESULT = new FirstOrderAnd(left, right); :}
+    | basicformula:f
+        {: RESULT = f; :}
+    ;
+
+basicformula ::=
+    NEG basicformula:f
+        {: RESULT = new FirstOrderNot(f); :}
+    | OPEN formula:f CLOSE
+        {: RESULT = f; :}
+    | STRING:rel OPEN parameters:params CLOSE
+        {: RESULT = new FirstOrderRelation(rel, params); :}
+    | STRING:x EQUALS STRING:y
+        {: ArrayList<String> params = new ArrayList<>();
+           params.add(x); params.add(y);
+           RESULT = new FirstOrderRelation("=", params); :}
+    ;
+
+quantifiedformula ::=
+    NEG quantifiedformula:f
+        {: RESULT = new FirstOrderNot(f); :}
+    | EXISTS STRING:var DOT formula:f
+        {: RESULT = new FirstOrderExists(var, f); :}
+    | EXISTS STRING:var formula:f
+        {: RESULT = new FirstOrderExists(var, f); :}
+    | FORALL STRING:var DOT formula:f
+        {: RESULT = new FirstOrderForall(var, f); :}
+    | FORALL STRING:var formula:f
+        {: RESULT = new FirstOrderForall(var, f); :}
+    ;
+
+parameters ::=
+    STRING:s
+        {: RESULT = new ArrayList<String>(); RESULT.add(s); :}
+    | parameters:params COMMA STRING:s
+        {: RESULT = params; RESULT.add(s); :}
+    ;
