@@ -1,0 +1,4 @@
+Test 1 - Creates a simple java class, compiles it into a .jar and was added to GraLoG. Did nothing.
+Test 2 - Creates a renamed carbon copy of Dijkstra's Shortest Path implementation. Practice compiling and importing necessary GraLoG packages.
+Test 3 - Implementation of Prim's MST Algorithm. Still want to be able to delete edges, we'll get there
+Test 4 - Updated Prim's MST Algorithm to allow for Visualization tools, returning a set of simple 'states'

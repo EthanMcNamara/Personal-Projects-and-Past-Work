@@ -1,0 +1,52 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdftex 2023.1.8)  8 JAN 2023 04:36
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**external.tex
+(./external.tex
+! Undefined control sequence.
+l.1 \section
+            {Setting up your External Python Program}
+? 
+! Undefined control sequence.
+l.2 ...t (all of) it. This is easiest (and \textit
+                                                  {recommended} if you want ...
+
+? 
+Runaway argument?
+ 
+! Paragraph ended before \\ was complete.
+<to be read again> 
+                   \par 
+l.3 
+    
+? 
+! Undefined control sequence.
+l.7 \begin
+          {lstlisting}[title={Code Snippet 1},label=codeSnippet1]
+? 
+! You can't use `macro parameter character #' in horizontal mode.
+l.8 #
+     !/usr/bin/python
+? 
+! You can't use `macro parameter character #' in horizontal mode.
+l.9 #
+     HelloWorld.py
+? 
+! You can't use `macro parameter character #' in horizontal mode.
+l.11 #
+      A simple Gralog program which creates a vertex that says "Hello, world"
+? 
+! You can't use `macro parameter character #' in horizontal mode.
+l.13 g = Graph(None); #
+                       uses the current graph that is open
+? 
+[1{c:/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] )<c:/texlive/
+2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
+Output written on external.pdf (1 page, 20808 bytes).
+PDF statistics:
+ 12 PDF objects out of 1000 (max. 8388607)
+ 7 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

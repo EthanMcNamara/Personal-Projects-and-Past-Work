@@ -1,0 +1,97 @@
+package gralog.modallogic.parser;
+
+import java_cup.runtime.*;
+import gralog.algorithm.ParseError;
+import gralog.modallogic.formula.*;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
+
+parser code {:
+
+    String errorMsg = null;
+    private String inputString;
+
+    public Boolean hasError()
+    {
+        return errorMsg == null;
+    }
+    
+    public String getErrorMsg()
+    {
+        if(errorMsg == null)
+            return "no error";
+        else
+            return errorMsg;
+    }
+
+    @Override
+    public void report_error(String message, Object info) {
+    }
+
+    @Override
+    public void syntax_error(Symbol cur_token)
+    {
+        if(errorMsg == null)
+            errorMsg = "Syntax Error: " + cur_token.toString();
+    }
+
+    @Override
+    public void report_fatal_error(String message, Object info) throws ParseError
+    {
+        java_cup.runtime.ComplexSymbolFactory.ComplexSymbol symbol = (java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)info;
+        throw new ParseError("Unexpected " + symbol.getName(), inputString, symbol.xleft.getColumn());
+    }
+
+    static public ModalLogicFormula parseString(String str) throws Exception
+    {
+        ModalLogicParser parser = new ModalLogicParser(
+                new ModalLogicScanner(new StringReader(str)),
+                new java_cup.runtime.ComplexSymbolFactory());
+        parser.inputString = str;
+        Symbol parserresult = parser.parse();
+        return (ModalLogicFormula) parserresult.value;
+    }
+:}
+
+terminal LT, GT, BRACKETLEFT, BRACKETRIGHT;
+terminal DIAMOND, BOX, BOT, TOP, WEDGE, VEE, NEG, PARENTHESISLEFT, PARENTHESISRIGHT;
+terminal String STRING;
+
+non terminal ModalLogicFormula formula, veeformula, wedgeformula, atomicformula;
+
+formula ::= veeformula:f
+              {: RESULT = f; :}
+          ;
+
+veeformula ::= wedgeformula:left VEE veeformula:right
+                 {: RESULT = new ModalLogicOr(left, right); :}
+             | wedgeformula:f
+                 {: RESULT = f; :}
+             ;
+
+wedgeformula ::= atomicformula:left WEDGE wedgeformula:right
+                   {: RESULT = new ModalLogicAnd(left, right); :}
+               | atomicformula:f
+                   {: RESULT = f; :}
+               ;
+
+atomicformula ::= STRING:s                                            // a proposition
+                {: RESULT = new ModalLogicProposition(s); :}
+          | PARENTHESISLEFT formula:f PARENTHESISRIGHT
+                {: RESULT = f; :}
+          | BOT
+                {: RESULT = new ModalLogicBottom(); :} 
+          | TOP
+                {: RESULT = new ModalLogicTop(); :} 
+          | NEG atomicformula:f
+                {: RESULT = new ModalLogicNot(f); :}
+          | DIAMOND atomicformula:f
+                {: RESULT = new ModalLogicDiamond(f); :}
+          | LT STRING:s GT atomicformula:f
+                {: RESULT = new ModalLogicDiamond(s, f); :}
+          | BOX atomicformula:f
+                {: RESULT = new ModalLogicBox(f); :}
+          | BRACKETLEFT STRING:s BRACKETRIGHT atomicformula:f
+                {: RESULT = new ModalLogicBox(s, f); :}
+          ;

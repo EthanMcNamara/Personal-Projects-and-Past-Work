@@ -1,0 +1,36 @@
+# Generated parser
+**/parser/*Scanner.java
+**/parser/*ScannerToken.java
+**/parser/*Parser.java
+
+install/gradle
+
+# gradle
+/.gradle
+/build
+*/build/
+*/out/
+
+# netbeans
+/.nb-gradle/
+
+# jflex backups
+*.java~
+
+# OS-specific files (add lines accordingly)
+# Linux + KDE
+.directory
+
+# Windows
+[Tt]humbs.db
+
+# Mac OS-X
+*.DS_Store
+
+# IntelliJ IDEA
+.idea/
+.idea/*
+/bin/
+plugins/python/Gralog.pyc
+
+graphs/
