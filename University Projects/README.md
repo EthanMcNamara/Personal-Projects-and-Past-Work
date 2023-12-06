@@ -11,5 +11,5 @@ This program was created as part of a larger group project within the Web Servic
 Unfortunately the APIs that were used are no longer available, so the program does not fully function as intended.
 
 ## 2nd Year
-### Compiler Design and Construction - Full Compiler
+### Compiler Design and Construction - Jack Compiler
 This program was created as the main assessment for a module built around creating a simple compiler. The program compiles Jack code - a simple language from the [nand2tetris](https://www.nand2tetris.org/) project.

@@ -1,0 +1,12 @@
+function Main.main 1
+push pointer 0
+call PongGame.newInstance 1
+push pointer 0
+call PongGame.getInstance 1
+pop local 0
+push pointer 0
+call game.run 1
+push pointer 0
+call game.dispose 1
+push constant 0
+return
