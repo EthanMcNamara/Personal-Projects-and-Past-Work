@@ -10,6 +10,7 @@ On top of this, a copy of the files used to create the plugin, and a pre-compile
 Below are instructions for how to run GrALoG, as well as rebuild the program from scratch if necessary.
 
 ## Running GrALoG
+The plugins for GrALoG were designed on a Windows machine running Java 11. The following instructions are to run the program under those conditions
 
 ### How To Run:
 - Open the `gralog-master/` directory in cmd.
