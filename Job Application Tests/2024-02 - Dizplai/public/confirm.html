@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dizplai - Thank you</title>
+
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/custom.js" type="text/javascript"></script>
+</head>
+
+<body onload="getVotes();">
+    <div class="poll" id="pollDiv">
+        <img src="assets/logo.png" class="logo" alt="Dizplai">
+        <p class="text">Thank you for <b>your response</b></p>
+        <div class="center">
+            <button type="button" onclick="vote(this)" class="pollButton">
+                <div class="buttonGrid">
+                    <div class="buttonText" id="poll1">opt1</div>
+                    <div class="percText" id="percText1">0%</div>
+                </div>
+                <div class="percentage" id="perc1"></div>
+            </button>
+        </div>
+        <div class="center">
+            <button type="button" onclick="vote(this)" class="pollButton">
+                <div class="buttonGrid">
+                    <div class="buttonText" id="poll2">opt2</div>
+                    <div class="percText" id="percText2">0%</div>
+                </div>
+                <div class="percentage" id="perc2"></div>
+            </button>
+        </div>
+        <div class="center" id="optional1">
+            <button type="button" onclick="vote(this)" class="pollButton">
+                <div class="buttonGrid">
+                    <div class="buttonText" id="poll3">opt3</div>
+                    <div class="percText" id="percText3">0%</div>
+                </div>
+                <div class="percentage" id="perc3"></div>
+            </button>
+        </div>
+        <div class="center" id="optional2">
+            <button type="button" onclick="vote(this)" class="pollButton">
+                <div class="buttonGrid">
+                    <div class="buttonText" id="poll4">opt4</div>
+                    <div class="percText" id="percText4">0%</div>
+                </div>
+                <div class="percentage" id="perc4"></div>
+            </button>
+        </div>
+        <div class="center" id="optional3">
+            <button type="button" onclick="vote(this)" class="pollButton">
+                <div class="buttonGrid">
+                    <div class="buttonText" id="poll5">opt5</div>
+                    <div class="percText" id="percText5">0%</div>
+                </div>
+                <div class="percentage" id="perc5"></div>
+            </button>
+        </div>
+    </div>
+</body>
+</html> 

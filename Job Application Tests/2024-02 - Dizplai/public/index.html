@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dizplai - Vote</title>
+
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="icon" href="data:,">
+
+    <script src="js/custom.js" type="text/javascript"></script>
+</head>
+
+<body onload="getPoll();">
+<div class="poll" id="pollDiv">
+    <img src="assets/logo.png" class="logo" alt="Dizplai">
+    <p class="text" id="pollQuestion">Placeholder <b>Question</b></p>
+    <div class="center">
+        <button type="button" onclick="vote(this)" class="pollButton clickable" id="poll1">opt1</button>
+    </div>
+    <div class="center">
+        <button type="button" onclick="vote(this)" class="pollButton clickable" id="poll2">opt2</button>
+    </div>
+    <div class="center" id="optional1">
+        <button type="button" onclick="vote(this)" class="pollButton clickable" id="poll3">opt3</button>
+    </div>
+    <div class="center" id="optional2">
+        <button type="button" onclick="vote(this)" class="pollButton clickable" id="poll4">opt4</button>
+    </div>
+    <div class="center" id="optional3">
+        <button type="button" onclick="vote(this)" class="pollButton clickable" id="poll5">opt5</button>
+    </div>
+    <div class="center">
+        <button type="submit" onclick="submitCheck()" class="pollButton dimmedButton submit" id="submit">SUBMIT</button>
+    </div>
+</div>
+
+</body>
+</html> 

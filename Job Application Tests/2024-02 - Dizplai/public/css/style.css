@@ -1,0 +1,150 @@
+@font-face {
+    font-family: 'Outfit';
+    src: url('../assets/Outfit/Outfit-VariableFont_wght.ttf') format('truetype');
+}
+
+:root {
+    --portraitHeight: 8.5vh;
+    --landscapeHeight: 6.5vh;
+}
+
+body {
+    color: white;
+    font-family: 'Outfit';
+}
+
+button {
+    font-family: 'Outfit';
+    color: white;
+    outline:#8C8C8C solid 2px;
+    border: none;
+    background: rgba(140, 140, 140, 0.5);
+    border-radius: 8px;
+    width: 100%;
+    font-size: 2.5vmin;
+    transition: 0.3s;
+}
+
+.buttonText {
+    grid-column: 2 / span 3;
+    text-align: center;
+    z-index: 10;
+}
+
+.center {
+    position: relative;
+    max-width: 35vw;
+    margin: auto;
+    padding: 18px;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.clickable:hover {
+    background: white;
+    color: #996BF9;
+    cursor: pointer;
+}
+
+.dimmedButton {
+    background: rgba(140, 140, 140, 0.25);
+    color: rgba(255,255,255,0.25);
+}
+
+.highlightedButton {
+    background: white;
+    color: #996BF9;
+    cursor: pointer;
+}
+
+html {
+    background-image: url("../assets/background.jpg");
+    height: auto;
+    min-height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+}
+
+.logo {
+    display: block;
+    margin: auto;
+    height: 6.5vh;
+    padding-top: 30px;
+}
+
+p {
+    text-align: center;
+}
+
+.poll {
+    position: relative;
+    height: 100%;
+    margin: auto;
+    text-align: center;
+}
+
+.buttonGrid {
+    width: 98%;
+    display: inline-grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    column-gap: 0;
+}
+
+.pollButton {
+    position: relative;
+    z-index: 0;
+}
+
+.percentage {
+    z-index: 5;
+    border-radius: 8px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: inline-block;
+    height: 100%;
+    background-color: #996BF9;
+    width: 0;
+}
+
+.percText {
+    grid-column: 5;
+    text-align: right;
+    z-index: 6;
+}
+
+.test {
+    z-index: 7;
+    grid-column: 1;
+    text-align: left;
+}
+
+.text  {
+    font-size: 5vmin;
+}
+
+@media screen and (max-width: 1280px) {
+    .center {
+        max-width: 70vw;
+    }
+}
+
+@media screen and (max-width: 670px) {
+    .center {
+        max-width: 100vw;
+    }
+}
+
+@media screen and (orientation: portrait) {
+    .pollButton {
+        height: var(--portraitHeight);
+        font-size: 4.5vmin;
+    }
+}
+
+@media screen and (orientation: landscape) {
+    .pollButton {
+        height: var(--landscapeHeight);
+    }
+}
